@@ -13,8 +13,7 @@ const validasiInput = (nilaiSiswa) => {
       return kondisi || kondisi2
    })
 
-   if(nilaiValid) return true
-   return false
+   return nilaiValid
 }
 
 
