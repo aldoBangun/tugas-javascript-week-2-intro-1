@@ -6,11 +6,14 @@ const nilaiSiswa = {
 }
 
 const validasiInput = (nilaiSiswa) => {
-   const nilaiValid = Object.values(nilaiSiswa).every(nilai => {
-      const kondisi = nilai >= 0 || nilai.trim() !== ''
-      const kondisi2 = nilai !== null || nilai !== undefined
+   if (typeof nilaiSiswa !== "object") return false
 
-      return kondisi || kondisi2
+   const nilaiValid = Object.values(nilaiSiswa).every(nilai => {
+      const kondisi = typeof nilai === 'number'
+      const kondisi2 = nilai !== null && nilai !== undefined
+      const kondisi3 = nilai >= 0
+
+      return kondisi && kondisi2 && kondisi3
    })
 
    return nilaiValid
@@ -48,4 +51,11 @@ const hitungNilaiRerataUjian = (nilaiSiswa) => {
    cetakHasil(nilaiSiswa)
 }
 
+// Test invalid input type
+hitungNilaiRerataUjian('ini bukan object')
+
+// Test invalid input type in object
+hitungNilaiRerataUjian({ pesan: 'ini bukan nilai angka (invalid)' })
+
+// Test valid input
 hitungNilaiRerataUjian(nilaiSiswa)
